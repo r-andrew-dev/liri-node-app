@@ -1,7 +1,8 @@
 require("dotenv").config();
 
+var axios = require("axios");
+
 const keys = require("./keys.js");
-const spotify = new Spotify(keys.spotify);
 
 const command = process.argv[2];
 
@@ -18,15 +19,34 @@ if (command === "concert-this") {
 }
 
 function getConcertInfo() {
-    let artist = procss.argv[3];
+
+    let artist = process.argv[3];
     let queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-    });
+    axios.get(queryURL).then(
+        function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log("---------------Data---------------");
+            console.log(error.response.data);
+            console.log("---------------Status---------------");
+            console.log(error.response.status);
+            console.log("---------------Status---------------");
+            console.log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an object that comes back with details pertaining to the error that occurred.
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
 };
 
 function getSpotifyInfo() {
