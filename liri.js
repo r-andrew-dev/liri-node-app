@@ -3,7 +3,7 @@ require("dotenv").config();
 const keys = require("./keys.js");
 const spotify = new Spotify(keys.spotify);
 
-const command = process.argv[2]
+const command = process.argv[2];
 
 if (command === "concert-this") {
     getConcertInfo();
@@ -31,7 +31,7 @@ function getConcertInfo() {
 
 function getSpotifyInfo() {
     let song = process.argv[3];
-    let Spotify = require('node-spotify-api');
+    const Spotify = require('node-spotify-api');
 
     let spotify = new Spotify({
         id: keys.id,
@@ -48,11 +48,11 @@ function getSpotifyInfo() {
               });}
 
 function getMovieInfo() {
-    var axios = require("axios");
-    var movie = process.argv[3];
+    const axios = require("axios");
+    let movie = process.argv[3];
     axios.get("http://www.omdbapi.com/?t=" + movie + "s&y=&plot=short&apikey=trilogy").then(
   function(response) {
-    console.log("The movie's rating is: " + response.data.imdbRating);
+    console.log(response);
   })
   .catch(function(error) {
     if (error.response) {
@@ -74,4 +74,30 @@ function getMovieInfo() {
     }
     console.log(error.config);
   });
+}
+
+function getTextFile() {
+
+    const fs = require("fs");
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+          return console.log(error);
+        }
+      
+        // We will then print the contents of data
+        console.log(data);
+      
+        // Then split it by commas (to make it more readable)
+        var dataArr = data.split(", ");
+      
+        // We will then re-display the content as an array for later use.
+        console.log(dataArr);
+
+        dataArr[0] = command; 
+      
+      });
+
+
 }
