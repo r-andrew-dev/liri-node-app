@@ -139,12 +139,14 @@ function getTextFile() {
       
          // We will then re-display the content as an array for later use.
         console.log(dataArr);
-     
-        command = dataArr[0]; 
-     
-        userChoice = dataArr[1];
 
+        if (dataArr.length === 2) {
+        command = dataArr[0]; 
+        userChoice = dataArr[1];
         checkCommand();
+        } else (
+            console.log("Check text format in random.txt. Format should be --- command, 'searchTerm'.")
+        )
     })
 
 }
