@@ -52,10 +52,12 @@ function getConcertInfo() {
 function getSpotifyInfo() {
     let song = process.argv[3];
     const Spotify = require('node-spotify-api');
+    const keys = require("./keys.js");
 
     let spotify = new Spotify({
-        id: keys.id,
-        secret: keys.secret
+         id: keys.spotify.id,
+         secret: keys.spotify.secret
+         
                 });
             
                 spotify
