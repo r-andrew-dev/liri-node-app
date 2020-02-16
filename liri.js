@@ -6,6 +6,22 @@ const keys = require("./keys.js");
 
 const command = process.argv[2];
 
+const nodeArgs = process.argv;
+
+let userChoice = "";
+
+for (let i = 3; i < nodeArgs.length; i++) {
+
+    if (i > 3 && i < nodeArgs.length) {
+      userChoice = userChoice + "+" + nodeArgs[i];
+    } else {
+      userChoice += nodeArgs[i];
+  
+    }
+  }
+
+
+
 if (command === "concert-this") {
     getConcertInfo();
 } else if (command === "spotify-this-song") {
@@ -20,7 +36,7 @@ if (command === "concert-this") {
 
 function getConcertInfo() {
 
-    let artist = process.argv[3];
+    let artist = userChoice;
     let queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
 
     axios.get(queryURL).then(
@@ -50,7 +66,7 @@ function getConcertInfo() {
 };
 
 function getSpotifyInfo() {
-    let song = process.argv[3];
+    let song = userChoice;
     const Spotify = require('node-spotify-api');
     const keys = require("./keys.js");
 
@@ -71,12 +87,12 @@ function getSpotifyInfo() {
 
 function getMovieInfo() {
     const axios = require("axios");
-    let movie = process.argv[3];
+    let movie = userChoice;
     axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
   function(data) {
       var data = data.data;
     console.log("\n-------------\n")
-    console.log("Title: " + movie + "\nRelease Year: " + data.Year +
+    console.log("Title: " + data.Title + "\nRelease Year: " + data.Year +
     "\nIMDB Rating: " + data.imdbRating + "\nRotten Tomatoes Rating: " + data.Ratings[1].Value + "\nCountry: " +
     data.Country + "\nLanguage: " + data.Language + "\nPlot: " + data.Plot + "\nActors: " + data.Actors);
     console.log("\n-------------\n")
@@ -122,6 +138,20 @@ function getTextFile() {
         console.log(dataArr);
 
         dataArr[0] = command; 
+
+        userChoice = "";
+
+        for (let i = 1; i < dataArr.length; i++) {
+
+            if (i > 1 && i < dataArr.length) {
+              userChoice = userChoice + "+" + dataArr[i];
+            } else {
+              userChoice += dataArr[i];
+          
+            }
+          }
+
+
       
       });
 
