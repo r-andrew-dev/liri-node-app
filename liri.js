@@ -1,12 +1,12 @@
 require("dotenv").config();
 
-var axios = require("axios");
+const axios = require("axios");
 
 const keys = require("./keys.js");
 
-const command = process.argv[2];
+let command = process.argv[2];
 
-const nodeArgs = process.argv;
+let nodeArgs = process.argv;
 
 let userChoice = "";
 
@@ -20,7 +20,7 @@ for (let i = 3; i < nodeArgs.length; i++) {
     }
   }
 
-
+function checkCommand() {
 
 if (command === "concert-this") {
     getConcertInfo();
@@ -33,6 +33,10 @@ if (command === "concert-this") {
 } else {
     console.log("Please enter a valid command.")
 }
+
+}
+
+checkCommand();
 
 function getConcertInfo() {
 
@@ -130,30 +134,17 @@ function getTextFile() {
       
         // We will then print the contents of data
         console.log(data);
-      
         // Then split it by commas (to make it more readable)
-        var dataArr = data.split(", ");
+        let dataArr = data.split(", ");
       
-        // We will then re-display the content as an array for later use.
+         // We will then re-display the content as an array for later use.
         console.log(dataArr);
+     
+        command = dataArr[0]; 
+     
+        userChoice = dataArr[1];
 
-        dataArr[0] = command; 
-
-        userChoice = "";
-
-        for (let i = 1; i < dataArr.length; i++) {
-
-            if (i > 1 && i < dataArr.length) {
-              userChoice = userChoice + "+" + dataArr[i];
-            } else {
-              userChoice += dataArr[i];
-          
-            }
-          }
-
-
-      
-      });
-
+        checkCommand();
+    })
 
 }
