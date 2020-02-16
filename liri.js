@@ -72,11 +72,15 @@ function getSpotifyInfo() {
 function getMovieInfo() {
     const axios = require("axios");
     let movie = process.argv[3];
-    axios.get("http://www.omdbapi.com/?t=" + movie + "s&y=&plot=short&apikey=trilogy").then(
-  function(response) {
-    console.log(response);
-  })
-  .catch(function(error) {
+    axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
+  function(data) {
+      var data = data.data;
+    console.log("\n-------------\n")
+    console.log("Title: " + movie + "\nRelease Year: " + data.Year +
+    "\nIMDB Rating: " + data.imdbRating + "\nRotten Tomatoes Rating: " + data.Ratings[1].Value + "\nCountry: " +
+    data.Country + "\nLanguage: " + data.Language + "\nPlot: " + data.Plot + "\nActors: " + data.Actors);
+    console.log("\n-------------\n")
+}).catch(function(error) {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
