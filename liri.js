@@ -43,17 +43,18 @@ function getConcertInfo() {
 
   axios.get(queryURL).then(
     function (response) {
-      console.log(response);
       data = response.data
 
-      console.log()
-
+      if (data.length === 0) {
+        console.log("This artist/band does not currently have any tour information in Bands in Town.")
+      } else {
       for (i = 0; i < 5; i++) {
         console.log("Artist: " + data[0].artist.name + "\nVenue: " + data[i].venue.name +
           ", " + data[i].venue.city + ", " + data[i].venue.region + ", " + data[i].venue.country +
-          "\nDate of the Event: " + moment(data[i].datetime).format('MM DD YYYY'))
+          "\nDate of the Event: " + moment(data[i].datetime).format('MM DD YYYY') + "\nTickets: " + data[i].offers[0].url);
           console.log("\n---------\n");
       }
+    }
     })
     .catch(function (error) {
       if (error.response) {
