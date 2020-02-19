@@ -25,7 +25,7 @@ To use Liri, you will need node installed as well as the following npm packages
 You will also need your own .env file. Inside your .env you will need your own spotify client ID and password. These can be obtained at https://developer.spotify.com/my-applications/#!/. You should then save them in this format in your .env file: 
 
 
-SPOTIFY_ID= [YOUR - CLIENT - ID - HERE]
+SPOTIFY_ID= [YOUR - CLIENT - ID - HERE] </br>
 SPOTIFY_SECRET=[YOUR - SPOTIFY - SECRET - HERE]
 
 ---------------------------------
