@@ -4,7 +4,7 @@ const axios = require("axios");
 
 let command = process.argv[2];
 
-let nodeArgs = process.argv;
+const nodeArgs = process.argv;
 
 let userChoice = "";
 
@@ -43,7 +43,7 @@ function getConcertInfo() {
 
   axios.get(queryURL).then(
     function (response) {
-      data = response.data
+      let data = response.data
 
       if (data.length === 0) {
         console.log("This artist/band does not currently have any tour information in Bands in Town.")
@@ -79,33 +79,54 @@ function getConcertInfo() {
 };
 
 function getSpotifyInfo() {
+  
   let song = userChoice;
-  console.log(userChoice)
-  console.log(typeof userChoice);
   const SpotifyWebApi = require('node-spotify-api');
   const keys = require("./keys.js");
-  console.log("keys: " + JSON.stringify(keys));
+
   let spotify = new SpotifyWebApi({
     id: keys.spotify.id,
     secret: keys.spotify.secret
 
   })
 
-  spotify.search({ type: "track", query: song }, function (err, data) {
+  spotify.search({type
+    : "track", query: song, limit: 10}, function (err, data) {
+    
+      data = data.tracks
+    
+    console.log(data);
+    
     if (err) {
       return console.log('Error occurred: ' + err);
+    } else {
+    for (i = 0; i < 10; i++) {
+
+    console.log("Song Name: " + data.items[i].name)
+    console.log("Preview URL: " + data.items[i].preview_url + "\nAlbum Name: "
+    + data.items[i].album.name + "\nOpen in Spotify (Spotify required): " + data.items[i].external_urls.spotify + "\nArtists: ")
+    for (j=0; j < data.items[i].artists.length; j++) {
+    console.log(data.items[i].artists[j].name + ",");
     }
-    console.log("made it here")
-    console.log(data.tracks.items);
+    console.log("\n------------\n");
+
+    }
+  }
   });
 }
 
 function getMovieInfo() {
   const axios = require("axios");
+
   let movie = userChoice;
+
+  if(userChoice.length === 0) {
+      movie = "Mr. Nobody"
+  }
+
   axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
     function (data) {
-      var data = data.data;
+      data = data.data;
       console.log("\n-------------\n")
       console.log("Title: " + data.Title + "\nRelease Year: " + data.Year +
         "\nIMDB Rating: " + data.imdbRating + "\nRotten Tomatoes Rating: " + data.Ratings[1].Value + "\nCountry: " +
