@@ -131,8 +131,17 @@ function getMovieInfo() {
       data = data.data;
       console.log("\n-------------\n")
       console.log("Title: " + data.Title + "\nRelease Year: " + data.Year +
-        "\nIMDB Rating: " + data.imdbRating + "\nRotten Tomatoes Rating: " + data.Ratings[1].Value + "\nCountry: " +
-        data.Country + "\nLanguage: " + data.Language + "\nPlot: " + data.Plot + "\nActors: " + data.Actors);
+        "\nIMDB Rating: " + data.imdbRating)
+        const test = data.Ratings.filter(x => x.Source === "Rotten Tomatoes")[0]
+           if (test !== undefined)  
+            console.log("Rotten Tomatoes Rating: " + test.Value)
+     
+          else {
+              console.log("Rotten Tomatoes: This data is not available");
+              }
+         console.log("Country: " +
+        data.Country + "\nLanguage: " + data.Language + "\nPlot: " + data.Plot + "\nActors: " + data.Actors)
+
       console.log("\n-------------\n")
     }).catch(function (error) {
       if (error.response) {
@@ -169,7 +178,7 @@ function getTextFile() {
     // We will then print the contents of data
     console.log(data);
     // Then split it by commas (to make it more readable)
-    let dataArr = data.split(", ");
+    let dataArr = data.split(",");
 
     // We will then re-display the content as an array for later use.
     console.log(dataArr);
@@ -179,7 +188,7 @@ function getTextFile() {
       userChoice = dataArr[1];
       checkCommand();
     } else {
-      console.log("Check text format in random.txt. Format should be: command, search term.")
+      console.log("Check text format in random.txt. Format should be: command, 'search term'.")
     }
   })
 
