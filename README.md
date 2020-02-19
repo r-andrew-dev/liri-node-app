@@ -34,9 +34,7 @@ EXAMPLES:
 
 spotifiy-this-song: 
 
-<iframe src="https://drive.google.com/file/d/1iAWFHKSuuXEV_BtiTwTEqfoIDgj-9op-/preview" width="640" height="480"></iframe>
-
-<img src="images/spotify-this-song-correct.gif"></img>
+<img src="images/spotify-this-song-big.gif"></img>
 
 
 
