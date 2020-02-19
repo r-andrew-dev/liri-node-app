@@ -81,7 +81,7 @@ function getConcertInfo() {
 function getSpotifyInfo() {
   
   let song = userChoice;
-  let limit = 10
+  let limit = 5
   const SpotifyWebApi = require('node-spotify-api');
   const keys = require("./keys.js");
 
@@ -178,7 +178,7 @@ function getTextFile() {
     // We will then print the contents of data
     console.log(data);
     // Then split it by commas (to make it more readable)
-    let dataArr = data.split(",");
+    let dataArr = data.split(", ");
 
     // We will then re-display the content as an array for later use.
     console.log(dataArr);
@@ -188,7 +188,7 @@ function getTextFile() {
       userChoice = dataArr[1];
       checkCommand();
     } else {
-      console.log("Check text format in random.txt. Format should be: command, 'search term'.")
+      console.log("Check text format in random.txt. Format should be: command, search term(s).")
     }
   })
 
