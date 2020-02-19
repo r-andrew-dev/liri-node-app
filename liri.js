@@ -81,6 +81,7 @@ function getConcertInfo() {
 function getSpotifyInfo() {
   
   let song = userChoice;
+  let limit = 10
   const SpotifyWebApi = require('node-spotify-api');
   const keys = require("./keys.js");
 
@@ -90,17 +91,20 @@ function getSpotifyInfo() {
 
   })
 
+  if (song === "") {
+    song = "The Sign"
+    limit = 1
+  }
   spotify.search({type
-    : "track", query: song, limit: 10}, function (err, data) {
+    : "track", query: song, limit: limit}, function (err, data) {
     
       data = data.tracks
     
-    console.log(data);
-    
     if (err) {
       return console.log('Error occurred: ' + err);
-    } else {
-    for (i = 0; i < 10; i++) {
+    } 
+
+    for (i = 0; i < data.items.length; i++) {
 
     console.log("Song Name: " + data.items[i].name)
     console.log("Preview URL: " + data.items[i].preview_url + "\nAlbum Name: "
@@ -109,8 +113,6 @@ function getSpotifyInfo() {
     console.log(data.items[i].artists[j].name + ",");
     }
     console.log("\n------------\n");
-
-    }
   }
   });
 }
@@ -176,9 +178,9 @@ function getTextFile() {
       command = dataArr[0];
       userChoice = dataArr[1];
       checkCommand();
-    } else (
-      console.log("Check text format in random.txt. Format should be --- command, 'searchTerm'.")
-    )
+    } else {
+      console.log("Check text format in random.txt. Format should be: command, search term.")
+    }
   })
 
 }
