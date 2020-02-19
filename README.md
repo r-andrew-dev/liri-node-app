@@ -26,7 +26,7 @@ You will also need your own .env file. Inside your .env you will need your own s
 
 
 //SPOTIFY_ID= [YOUR - CLIENT - ID - HERE]
-//SPOTIFY_SECRET=[YOUR - SPOTIFY - SECRET - HERE]
+//\nSPOTIFY_SECRET=[YOUR - SPOTIFY - SECRET - HERE]
 
 ---------------------------------
 
