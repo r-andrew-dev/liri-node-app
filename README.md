@@ -5,7 +5,7 @@ LIRI is a command line node app that takes in parameters and gives you back data
 
 Liri can take four different commands. 
 
-1. spotify-this-song [song name] - This command will utilize the spotify API to access information about the song name entered by the user and also provide an external link to open in Spotify when available. If no song name is entered with this command, information for "The Sign" by Ace of Bass will be returned. At this time, the limit for results returned is set to five otherwise.
+1. spotify-this-song [song name] - This command will utilize the spotify API node package to access information about the song name entered by the user and also provide an external link to open in Spotify when available. If no song name is entered with this command, information for "The Sign" by Ace of Base will be returned. At this time, the limit for results returned is set to five when a song name is entered by user.
 
 2. movie-this [movie name] - This command will pull information about the movie name entered by the user. If no movie name is entered, it will default to Mr. Nobody. 
 
